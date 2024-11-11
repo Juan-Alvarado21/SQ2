@@ -12,3 +12,6 @@ Daniela Rojas - Eon Institute
 Mario David - Laureate Uni
 
 Juan Alvarado - IPN ESCOM
+
+
+--Prototype for AI & Democracy Hackathon--
