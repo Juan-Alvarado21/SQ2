@@ -6,6 +6,9 @@
 
 #### **TEAM**
 Martín Szyszlican - Abrimos.info
+
 Daniela Rojas - Eon Institute
+
 Mario David - Laureate Uni
-Juan Alvarado - IPN AI
+
+Juan Alvarado - IPN ESCOM
