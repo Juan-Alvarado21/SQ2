@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Verifier</title>
+    <style>
+      /* General styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      /* Left hidden column styles */
+      #left-column {
+        width: 250px;
+        background-color: #f7f7f7;
+        padding: 10px;
+        display: none;
+        border-radius: 10px;
+        margin-right: 10px;
+        animation: slideIn 0.3s ease;
+      }
+
+      /* Slide-in animation for left column */
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+
+      /* Show column button */
+      #show-column {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        cursor: pointer;
+        padding: 8px 12px;
+        border: none;
+        background-color: #3498db;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      #show-column:hover {
+        background-color: #2980b9;
+      }
+
+      /* Main content container */
+      #main-content {
+        flex-grow: 1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Flex layout for form and results */
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 600px;
+        gap: 20px;
+      }
+
+      /* Loading spinner */
+      #loading {
+        display: none;
+        width: 50px;
+        height: 50px;
+        border: 5px solid #ccc;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Hide content while loading */
+      #result {
+        display: none;
+        padding: 20px;
+        width: 100%;
+        background-color: #fafafa;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.3s ease;
+        margin-top: 20px;
+      }
+
+      /* URL input, button, and text box styling */
+      input[type="url"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="url"]:focus {
+        border-color: #3498db;
+        outline: none;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #3498db;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      /* Styles for probability and result */
+      .auth-probability,
+      .auth-status {
+        font-weight: bold;
+        font-size: 1.5em;
+        padding: 5px 0;
+      }
+
+      .auth-probability {
+        color: #2ecc71;
+      }
+
+      .auth-status {
+        color: #e74c3c;
+      }
+
+      /* Flexbox for separating sections */
+      .text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="show-column" onclick="toggleColumn()">≡</button>
+
+    <!-- Hidden left column for other instances -->
+    <div id="left-column">
+      <h2>Options</h2>
+      <ul>
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+      </ul>
+    </div>
+
+    <div id="main-content">
+      <h1>News Verifier</h1>
+      <div class="flex-container">
+        <form method="POST">
+          <input
+            type="url"
+            name="url"
+            placeholder="Enter the news URL"
+            required
+          />
+          <button type="submit" onclick="showLoading()">Validate URL</button>
+        </form>
+
+        <div id="loading"></div>
+        <div id="result" class="text-container">
+          <p>
+            <strong>Summary:</strong>
+            <span class="text-summary">{{ summary }}</span>
+          </p>
+          <p>
+            <strong>Authenticity Analysis Message:</strong>
+            <span class="text-auth">{{ authenticity_message }}</span>
+          </p>
+          <p>
+            <strong>Authenticity Probability:</strong>
+            <span class="auth-probability">{{ probability }}</span>
+          </p>
+          <p>
+            <strong>Result:</strong>
+            <span class="auth-status">{{ authenticity_status }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showLoading() {
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("result").style.display = "none";
+      }
+
+      window.onload = function () {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("result").style.display = "block";
+      };
+
+      function toggleColumn() {
+        var column = document.getElementById("left-column");
+        column.style.display =
+          column.style.display === "none" ? "block" : "none";
+      }
+    </script>
+  </body>
+</html>
